@@ -1,0 +1,9 @@
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\bin\Debug\Chess over local network.exe.config
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\bin\Debug\Chess over local network.exe
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\bin\Debug\Chess over local network.pdb
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess over local network.csproj.AssemblyReference.cache
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess_over_local_network.Properties.Resources.resources
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess over local network.csproj.GenerateResource.cache
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess over local network.csproj.CoreCompileInputs.cache
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess over local network.exe
+C:\Users\GAMING\source\repos\Chess over local network\Chess over local network\obj\Debug\Chess over local network.pdb
