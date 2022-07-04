@@ -32,6 +32,7 @@ namespace Chess_over_local_network
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             board.FindClickedPiece(e.X, e.Y);
+
             DrawScene(CreateGraphics());
         }
 

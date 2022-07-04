@@ -18,11 +18,34 @@ namespace Chess_over_local_network
         public Piece selectedPiece = null;
         public Square selectedPieceSquare = null;
         List<Square> LHighlighted = new List<Square>();
+        public List<Square> All = new List<Square>();
+
         public Boardcs()
         {
             Lpieces = MakePieces();
             squares = MakeSquares();
             PutPiecesOnSquares();
+        }
+
+        public void FindAllLegalMovesForColor(CommonAttributes.Color color)
+        {
+            List<Square> temp = new List<Square>();
+            for (int i=0;i<Lpieces.Count;i++)
+            {
+                if (Lpieces[i].color == color)
+                {
+                    temp = Lpieces[i].GetLegalMovesOnBoard(this);
+
+                    if (temp != null)
+                    {
+                        for (int k = 0; k < temp.Count; k++)
+                        {
+                            All.Add(temp[k]);
+                        }
+                    }
+                 
+                }
+            }
         }
 
         public Square[,] MakeSquares()
@@ -213,7 +236,24 @@ namespace Chess_over_local_network
                     if (Lpieces[i].IsClicked(x, y))
                     {
                         selectedPiece = Lpieces[i];
+
+                        if (selectedPiece.pieceType == Piece.pieceTypes.King)
+                        {
+                            CommonAttributes.Color opposite;
+
+                            if (selectedPiece.color == CommonAttributes.Color.White)
+                            {
+                                opposite = CommonAttributes.Color.Black;
+                            }
+                            else
+                            {
+                                opposite = CommonAttributes.Color.White;
+                            }
+                            FindAllLegalMovesForColor(opposite);
+                        }
                         LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
+
+                     
                     }
 
                 }
