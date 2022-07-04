@@ -30,5 +30,285 @@ namespace Chess_over_local_network
 
 
         }
+
+
+        public bool validJK(int j, int k)
+        {
+            if (j >=0 && j <8)
+            {
+                if (k >=0 && k <8)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public override List<Square> GetLegalMovesOnBoard(Boardcs board)
+        {
+            List<Square> L = new List<Square>();
+            Color oppositeColor;
+            if (color == Color.White)
+            {
+                oppositeColor = Color.Black;
+            }
+            else
+            {
+                oppositeColor = Color.White;
+            }
+
+            int j = rank;
+            int k = file;
+
+            j = j + 2;
+            k--;
+
+            if ( validJK(j,k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+                    
+
+                }
+            }
+
+             j = rank;
+             k = file;
+
+            j = j + 2;
+            k++;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+
+
+            j = rank;
+            k = file;
+
+            j = j - 2;
+            k++;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+            j = rank;
+            k = file;
+
+            j = j - 2;
+            k--;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+
+            j = rank;
+            k = file;
+
+            j--;
+            k = k-2;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+
+            j = rank;
+            k = file;
+
+            j++;
+            k = k - 2;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+
+
+            j = rank;
+            k = file;
+
+            j++;
+            k = k + 2;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+
+
+            j = rank;
+            k = file;
+
+            j--;
+            k = k + 2;
+
+            if (validJK(j, k))
+            {
+
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+            return L;
+
+        }
     }
 }
