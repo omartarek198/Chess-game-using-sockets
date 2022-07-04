@@ -37,7 +37,7 @@ namespace Chess_over_local_network
 
         
 
-        public List<Square> GetLegalMovesOnBoard()
+        public virtual List<Square> GetLegalMovesOnBoard(Boardcs boardcs)
         {
             return null;
         }

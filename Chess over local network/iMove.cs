@@ -8,7 +8,7 @@ namespace Chess_over_local_network
 {
     interface iMove
     {
-        List<Square> GetLegalMovesOnBoard();
+        List<Square> GetLegalMovesOnBoard(Boardcs boardcs);
 
     }
 }

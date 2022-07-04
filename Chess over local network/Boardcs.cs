@@ -17,6 +17,7 @@ namespace Chess_over_local_network
         public List<Piece> Lpieces = new List<Piece>();
         public Piece selectedPiece = null;
         public Square selectedPieceSquare = null;
+        List<Square> LHighlighted = new List<Square>();
         public Boardcs()
         {
             Lpieces = MakePieces();
@@ -185,6 +186,7 @@ namespace Chess_over_local_network
                                 GetSquare(selectedPiece.file, selectedPiece.rank).removePiece();
                                 squares[i, j].attachPiece(selectedPiece);
                                 selectedPiece = null;
+                                LHighlighted.RemoveRange(0, LHighlighted.Count);
                                 break;
                             }
                             else
@@ -193,6 +195,8 @@ namespace Chess_over_local_network
                                 Lpieces.Remove(GetPiece(i, j));
                                 squares[i, j].attachPiece(selectedPiece);
                                 selectedPiece = null;
+                                LHighlighted.RemoveRange(0, LHighlighted.Count);
+
                                 break;
                             }
 
@@ -206,8 +210,11 @@ namespace Chess_over_local_network
                 for (int i = 0; i < Lpieces.Count; i++)
                 {
                     if (Lpieces[i].IsClicked(x, y))
+                    {
                         selectedPiece = Lpieces[i];
-                     
+                        LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
+                    }
+
                 }
 
             }
@@ -261,7 +268,10 @@ namespace Chess_over_local_network
                     draw.DrawSelf(screen);
                 }
             }
-
+            for (int i = 0; i < LHighlighted.Count; i++)
+            {
+                screen.FillRectangle(Brushes.DarkCyan, LHighlighted[i].position.X, LHighlighted[i].position.Y, LHighlighted[i].width, LHighlighted[i].height);
+            }
             for (int i=0;i<Lpieces.Count;i++)
             {
                 draw = Lpieces[i];

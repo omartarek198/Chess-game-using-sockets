@@ -32,6 +32,29 @@ namespace Chess_over_local_network
             }
 
 
+            
+
+        }
+
+        public override List<Square> GetLegalMovesOnBoard(Boardcs board)
+        {
+            List<Square> L = new List<Square>();
+             if (color == Color.White)
+            {
+                if (board.squares[rank+1,file].piece == null)
+                {
+                    L.Add(board.squares[rank + 1, file]);
+                    if (rank == 1 && board.squares[rank+2,file].piece == null)
+                    {
+                        L.Add(board.squares[rank + 2, file]);
+                    }
+                }
+            }
+             else
+            {
+
+            }
+            return L;
         }
     }
 }
