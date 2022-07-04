@@ -192,6 +192,7 @@ namespace Chess_over_local_network
                             else
                             {
                                 //remove ig?
+                                GetSquare(selectedPiece.file, selectedPiece.rank).removePiece();
                                 Lpieces.Remove(GetPiece(i, j));
                                 squares[i, j].attachPiece(selectedPiece);
                                 selectedPiece = null;

@@ -39,21 +39,60 @@ namespace Chess_over_local_network
         public override List<Square> GetLegalMovesOnBoard(Boardcs board)
         {
             List<Square> L = new List<Square>();
-             if (color == Color.White)
+
+
+            try
             {
-                if (board.squares[rank+1,file].piece == null)
+                if (color == Color.White)
                 {
-                    L.Add(board.squares[rank + 1, file]);
-                    if (rank == 1 && board.squares[rank+2,file].piece == null)
+
+                    // one step if no piece
+                    if (board.squares[rank + 1, file].piece == null)
                     {
-                        L.Add(board.squares[rank + 2, file]);
+                        L.Add(board.squares[rank + 1, file]);
+                        // two steps if on second row
+                        if (rank == 1 && board.squares[rank + 2, file].piece == null)
+                        {
+                            L.Add(board.squares[rank + 2, file]);
+                        }
+                    }
+                    // capture if possible
+                    if (board.squares[rank + 1, file + 1].piece != null && board.squares[rank + 1, file + 1].piece.color != color)
+                    {
+                        L.Add(board.squares[rank + 1, file + 1]);
+                    }
+                    if (board.squares[rank + 1, file - 1].piece != null && board.squares[rank + 1, file - 1].piece.color != color)
+                    {
+                        L.Add(board.squares[rank + 1, file - 1]);
+                    }
+
+
+                }
+                else
+                {
+                    if (board.squares[rank - 1, file].piece == null)
+                    {
+                        L.Add(board.squares[rank - 1, file]);
+                        if (rank == 6 && board.squares[rank - 2, file].piece == null)
+                        {
+                            L.Add(board.squares[rank - 2, file]);
+                        }
+                    }
+                    if (board.squares[rank - 1, file + 1].piece != null && board.squares[rank - 1, file + 1].piece.color != color)
+                    {
+                        L.Add(board.squares[rank - 1, file + 1]);
+                    }
+                    if (board.squares[rank - 1, file - 1].piece != null && board.squares[rank - 1, file - 1].piece.color != color)
+                    {
+                        L.Add(board.squares[rank - 1, file - 1]);
                     }
                 }
             }
-             else
+            catch
             {
 
             }
+           
             return L;
         }
     }

@@ -32,5 +32,134 @@ namespace Chess_over_local_network
 
 
         }
+        public override List<Square> GetLegalMovesOnBoard(Boardcs board)
+        {
+            List<Square> L = new List<Square>();
+            Color oppositeColor;
+            if (color == Color.White)
+            {
+                oppositeColor = Color.Black;
+            }
+            else
+            {
+                oppositeColor = Color.White;
+            }
+
+            int j = rank+1;
+            int k = file ;
+            for (; j < 8; j++)
+            {
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece!=null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+                    break;
+
+                }
+
+            }
+
+            j = rank - 1;
+             k = file;
+            for (; j > -1; j--)
+            {
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+                    break;
+
+                }
+
+            }
+
+
+            j = rank  ;
+            k = file-1;
+            for (; k > -1; k--)
+            {
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+                    break;
+
+                }
+
+            }
+
+
+
+            j = rank;
+            k = file +1;
+            for (; k< 8; k++)
+            {
+                if (board.squares[j, k].piece == null)
+                {
+                    L.Add(board.squares[j, k]);
+
+                }
+
+                if (board.squares[j, k].piece != null)
+                {
+                    if (board.squares[j, k].piece.color == oppositeColor)
+                    {
+                        L.Add(board.squares[j, k]);
+                    }
+                    else
+                    {
+
+                    }
+
+                    break;
+
+                }
+
+            }
+
+
+
+
+            return L;
+        }
     }
 }
