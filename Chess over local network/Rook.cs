@@ -61,6 +61,8 @@ namespace Chess_over_local_network
                     if (board.squares[j, k].piece.color == oppositeColor)
                     {
                         L.Add(board.squares[j, k]);
+                        if (board.squares[j, k].piece.pieceType == pieceTypes.King)
+                            CanSeeKing = true;
                     }
                     else
                     {
@@ -88,6 +90,8 @@ namespace Chess_over_local_network
                     if (board.squares[j, k].piece.color == oppositeColor)
                     {
                         L.Add(board.squares[j, k]);
+                        if (board.squares[j, k].piece.pieceType == pieceTypes.King)
+                            CanSeeKing = true;
                     }
                     else
                     {
@@ -117,6 +121,8 @@ namespace Chess_over_local_network
                     if (board.squares[j, k].piece.color == oppositeColor)
                     {
                         L.Add(board.squares[j, k]);
+                        if (board.squares[j, k].piece.pieceType == pieceTypes.King)
+                            CanSeeKing = true;
                     }
                     else
                     {
@@ -147,6 +153,8 @@ namespace Chess_over_local_network
                     if (board.squares[j, k].piece.color == oppositeColor)
                     {
                         L.Add(board.squares[j, k]);
+                        if (board.squares[j, k].piece.pieceType == pieceTypes.King)
+                            CanSeeKing = true;
                     }
                     else
                     {

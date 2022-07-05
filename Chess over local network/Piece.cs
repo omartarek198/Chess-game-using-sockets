@@ -18,6 +18,7 @@ namespace Chess_over_local_network
     {
 
         public Bitmap img;
+        public bool CanSeeKing = false;
         public List<Piece> LprotectedPieces = new List<Piece>();
         public enum pieceTypes
         {

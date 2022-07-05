@@ -31,30 +31,38 @@ namespace Chess_over_local_network
         }
         public void FindAllProtectedPiecesForColor(CommonAttributes.Color color)
         {
-            FindAllLegalMovesForColor(color);
-            CurrProtectedPieces = new List<Piece>();
-            for (int i=0;i<Lpieces.Count;i++)
+            for (int i = 0; i < Lpieces.Count; i++)
             {
                 if (Lpieces[i].color == color)
                 {
-                    for (int k=0;k<Lpieces[i].LprotectedPieces.Count;k++)
+                    Lpieces[i].GetLegalMovesOnBoard(this);
+
+                }
+            }
+            CurrProtectedPieces = new List<Piece>();
+            for (int i = 0; i < Lpieces.Count; i++)
+            {
+                if (Lpieces[i].color == color)
+                {
+                    for (int k = 0; k < Lpieces[i].LprotectedPieces.Count; k++)
                     {
                         CurrProtectedPieces.Add(Lpieces[i].LprotectedPieces[k]);
                     }
                 }
-            }   
-            
+            }
 
-            for (int i =0; i<CurrProtectedPieces.Count;i++)
+
+            for (int i = 0; i < CurrProtectedPieces.Count; i++)
             {
-                CurrProtectedSquares.Add(GetSquare(CurrProtectedPieces[i].file, 
+                CurrProtectedSquares.Add(GetSquare(CurrProtectedPieces[i].file,
                     CurrProtectedPieces[i].rank));
             }
         }
         public void FindAllLegalMovesForColor(CommonAttributes.Color color)
         {
             List<Square> temp = new List<Square>();
-            for (int i=0;i<Lpieces.Count;i++)
+            All = new List<Square>();
+            for (int i = 0; i < Lpieces.Count; i++)
             {
                 if (Lpieces[i].color == color)
                 {
@@ -67,7 +75,7 @@ namespace Chess_over_local_network
                             All.Add(temp[k]);
                         }
                     }
-                 
+
                 }
             }
         }
@@ -89,7 +97,7 @@ namespace Chess_over_local_network
 
 
 
-                    squares[  i, j] = new Square(color, i, j, point);
+                    squares[i, j] = new Square(color, i, j, point);
 
 
                     if (color == CommonAttributes.Color.White)
@@ -112,14 +120,14 @@ namespace Chess_over_local_network
 
 
         }
-        public List<Piece>MakePieces()
+        public List<Piece> MakePieces()
         {
             List<Piece> Lpieces = new List<Piece>();
             Piece piece;
             //MakingPawns
             for (int i = 0; i < 8; i++)
             {
-                piece = new Pawn(1,i,CommonAttributes.Color.White,Piece.pieceTypes.Pawn);
+                piece = new Pawn(1, i, CommonAttributes.Color.White, Piece.pieceTypes.Pawn);
                 Lpieces.Add(piece);
 
             }
@@ -135,7 +143,7 @@ namespace Chess_over_local_network
             // rooks
 
 
-             piece = new Rook (0,0 , CommonAttributes.Color.White, Piece.pieceTypes.Rook);
+            piece = new Rook(0, 0, CommonAttributes.Color.White, Piece.pieceTypes.Rook);
             Lpieces.Add(piece);
 
 
@@ -199,15 +207,15 @@ namespace Chess_over_local_network
 
         public void PutPiecesOnSquares()
         {
-            for (int i=0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 for (int k = 0; k < 8; k++)
                 {
-                    for (int j =0;j<Lpieces.Count;j++)
+                    for (int j = 0; j < Lpieces.Count; j++)
                     {
-                        if (squares[i,k].file == Lpieces[j].file)
+                        if (squares[i, k].file == Lpieces[j].file)
                         {
-                            if (squares[i,k].rank == Lpieces[j].rank)
+                            if (squares[i, k].rank == Lpieces[j].rank)
                             {
                                 squares[i, k].attachPiece(Lpieces[j]);
                             }
@@ -222,16 +230,20 @@ namespace Chess_over_local_network
 
             if (selectedPiece != null)
             {
-                for (int i=0;i<8;i++)
+                for (int i = 0; i < 8; i++)
                 {
-                    for (int j=0;j<8;j++)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (squares[i, j].IsClicked(x,y))
+                        if (squares[i, j].IsClicked(x, y))
                         {
                             if (squares[i, j].piece == null)
                             {
                                 GetSquare(selectedPiece.file, selectedPiece.rank).removePiece();
                                 squares[i, j].attachPiece(selectedPiece);
+                                if (CheckForChecks())
+                                {
+                                    MessageBox.Show("check");
+                                }
                                 selectedPiece = null;
                                 LHighlighted.RemoveRange(0, LHighlighted.Count);
                                 break;
@@ -242,7 +254,13 @@ namespace Chess_over_local_network
                                 GetSquare(selectedPiece.file, selectedPiece.rank).removePiece();
                                 Lpieces.Remove(GetPiece(i, j));
                                 squares[i, j].attachPiece(selectedPiece);
+                                if (CheckForChecks())
+                                {
+                                    MessageBox.Show("check");
+                                }
+
                                 selectedPiece = null;
+
                                 LHighlighted.RemoveRange(0, LHighlighted.Count);
 
                                 break;
@@ -253,7 +271,7 @@ namespace Chess_over_local_network
                     }
                 }
             }
-           else
+            else
             {
                 for (int i = 0; i < Lpieces.Count; i++)
                 {
@@ -276,11 +294,21 @@ namespace Chess_over_local_network
                             FindAllLegalMovesForColor(opposite);
                         }
 
+                        if (selectedPiece.color == CommonAttributes.Color.Black)
+                        {
+                            FindAllProtectedPiecesForColor(CommonAttributes.Color.White);
 
-                        //LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
-                        FindAllProtectedPiecesForColor(selectedPiece.color);
-                        LHighlighted = CurrProtectedSquares;
-                     
+                        }
+
+                        if (selectedPiece.color == CommonAttributes.Color.White)
+                        {
+                            FindAllProtectedPiecesForColor(CommonAttributes.Color.Black);
+
+                        }
+
+                        LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
+                        //LHighlighted = CurrProtectedSquares;
+
                     }
 
                 }
@@ -290,6 +318,36 @@ namespace Chess_over_local_network
 
 
         }
+
+        public bool CheckForChecks(){
+
+
+
+            for (int i = 0; i < Lpieces.Count; i++)
+            {
+                if (Lpieces[i].color == selectedPiece.color)
+                {
+                    Lpieces[i].GetLegalMovesOnBoard(this);
+
+                }
+            }
+
+
+            for (int i=0;i<Lpieces.Count;i++)
+            {
+                if (Lpieces[i].color == selectedPiece.color)
+                {
+                    if (Lpieces[i].CanSeeKing)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+
+            return false;
+        }
+
         public Square GetSquare(int file, int rank)
         {
             for (int i=0;i<8;i++)
@@ -324,6 +382,19 @@ namespace Chess_over_local_network
 
             return t;
         }
+
+        public bool IsPieceProtected(Piece piece)
+        {
+
+            for (int i=0;i<CurrProtectedPieces.Count;i++)
+            {
+                if (CurrProtectedPieces[i] == piece)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
          
         public void DrawBoard(Graphics screen)
         {
@@ -339,6 +410,11 @@ namespace Chess_over_local_network
             for (int i = 0; i < LHighlighted.Count; i++)
             {
                 screen.FillRectangle(Brushes.DarkCyan, LHighlighted[i].position.X, LHighlighted[i].position.Y, LHighlighted[i].width, LHighlighted[i].height);
+            }
+
+            for (int i = 0; i < CurrProtectedSquares.Count; i++)
+            {
+               // screen.FillRectangle(Brushes.DarkGreen, CurrProtectedSquares[i].position.X,CurrProtectedSquares[i].position.Y, CurrProtectedSquares[i].width, CurrProtectedSquares[i].height);
             }
             for (int i=0;i<Lpieces.Count;i++)
             {

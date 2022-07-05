@@ -63,6 +63,7 @@ namespace Chess_over_local_network
             List<Square> L = new List<Square>();
             int j = rank;
             int k = file;
+            LprotectedPieces = new List<Piece>();
 
             j--;
             if (validJK(j,k))
@@ -74,6 +75,22 @@ namespace Chess_over_local_network
                         L.Add(board.squares[j, k]);
                     }
 
+                }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
                 }
             }
 
@@ -91,6 +108,22 @@ namespace Chess_over_local_network
                     }
 
                 }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
+                }
             }
 
 
@@ -109,6 +142,22 @@ namespace Chess_over_local_network
                     }
 
                 }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
+                }
             }
 
             j = rank;
@@ -123,6 +172,22 @@ namespace Chess_over_local_network
                         L.Add(board.squares[j, k]);
                     }
 
+                }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
                 }
             }
 
@@ -141,6 +206,22 @@ namespace Chess_over_local_network
                     }
 
                 }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
+                }
             }
             j = rank;
             k = file;
@@ -155,6 +236,22 @@ namespace Chess_over_local_network
                         L.Add(board.squares[j, k]);
                     }
 
+                }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
                 }
             }
 
@@ -172,6 +269,22 @@ namespace Chess_over_local_network
                     }
 
                 }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
+                }
             }
 
             j = rank;
@@ -188,9 +301,28 @@ namespace Chess_over_local_network
                     }
 
                 }
+                else
+                {
+                    if (board.squares[j, k].piece.color == this.color)
+                    {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
+
+                    }
+                    else
+                    {
+                        if (!board.IsPieceProtected(board.squares[j, k].piece))
+                        {
+                            L.Add(board.squares[j, k]);
+
+                        }
+                    }
+                }
             }
 
-
+            if (pieceType == pieceTypes.King)
+            {
+                int x=5;
+            }
 
 
             return L;
