@@ -40,6 +40,7 @@ namespace Chess_over_local_network
         {
             List<Square> L = new List<Square>();
 
+            this.LprotectedPieces = new List<Piece>();
 
             try
             {
@@ -57,13 +58,35 @@ namespace Chess_over_local_network
                         }
                     }
                     // capture if possible
-                    if (board.squares[rank + 1, file + 1].piece != null && board.squares[rank + 1, file + 1].piece.color != color)
+                    if (board.squares[rank + 1, file + 1].piece != null  )
                     {
-                        L.Add(board.squares[rank + 1, file + 1]);
+                        if (board.squares[rank + 1, file + 1].piece.color != color)
+                        {
+
+
+                            L.Add(board.squares[rank + 1, file + 1]);
+                        }
+                        else
+                        {
+                            LprotectedPieces.Add(board.squares[rank+1, file+1].piece);
+
+                        }
                     }
-                    if (board.squares[rank + 1, file - 1].piece != null && board.squares[rank + 1, file - 1].piece.color != color)
+
+
+                    if (board.squares[rank + 1, file - 1].piece != null  )
                     {
-                        L.Add(board.squares[rank + 1, file - 1]);
+                        if (board.squares[rank + 1, file -1].piece.color != color)
+                        {
+
+
+                            L.Add(board.squares[rank + 1, file - 1]);
+                        }
+                        else
+                        {
+                            LprotectedPieces.Add(board.squares[rank + 1, file - 1].piece);
+
+                        }
                     }
 
 
@@ -78,13 +101,35 @@ namespace Chess_over_local_network
                             L.Add(board.squares[rank - 2, file]);
                         }
                     }
-                    if (board.squares[rank - 1, file + 1].piece != null && board.squares[rank - 1, file + 1].piece.color != color)
+
+                    if (board.squares[rank - 1, file + 1].piece != null
+                       )
                     {
-                        L.Add(board.squares[rank - 1, file + 1]);
+                        if (board.squares[rank - 1, file + 1].piece.color != color)
+                        {
+                            L.Add(board.squares[rank - 1, file + 1]);
+
+                        }
+                        else
+                        {
+                            LprotectedPieces.Add(board.squares[rank - 1, file + 1].piece)
+                                ;
+                        }
+
+
                     }
-                    if (board.squares[rank - 1, file - 1].piece != null && board.squares[rank - 1, file - 1].piece.color != color)
+                    if (board.squares[rank - 1, file - 1].piece != null  
+                       )
                     {
-                        L.Add(board.squares[rank - 1, file - 1]);
+                        if (board.squares[rank - 1, file - 1].piece.color != color)
+                        {
+                            L.Add(board.squares[rank - 1, file - 1]);
+
+                        }
+                        else
+                        {
+                            LprotectedPieces.Add(board.squares[rank - 1, file - 1].piece);
+                        }
                     }
                 }
             }

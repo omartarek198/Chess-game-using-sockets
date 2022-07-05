@@ -49,6 +49,8 @@ namespace Chess_over_local_network
         {
             List<Square> L = new List<Square>();
             Color oppositeColor;
+            this.LprotectedPieces = new List<Piece>();
+
             if (color == Color.White)
             {
                 oppositeColor = Color.Black;
@@ -81,10 +83,11 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
-                    
+
 
                 }
             }
@@ -112,6 +115,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -144,6 +148,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -174,6 +179,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -205,6 +211,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -236,6 +243,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -268,6 +276,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 
@@ -300,6 +309,7 @@ namespace Chess_over_local_network
                     }
                     else
                     {
+                        LprotectedPieces.Add(board.squares[j, k].piece);
 
                     }
 

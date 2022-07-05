@@ -19,6 +19,9 @@ namespace Chess_over_local_network
         public Square selectedPieceSquare = null;
         List<Square> LHighlighted = new List<Square>();
         public List<Square> All = new List<Square>();
+        public List<Piece> CurrProtectedPieces = new List<Piece>();
+        public List<Square> CurrProtectedSquares = new List<Square>();
+
 
         public Boardcs()
         {
@@ -26,7 +29,28 @@ namespace Chess_over_local_network
             squares = MakeSquares();
             PutPiecesOnSquares();
         }
+        public void FindAllProtectedPiecesForColor(CommonAttributes.Color color)
+        {
+            FindAllLegalMovesForColor(color);
+            CurrProtectedPieces = new List<Piece>();
+            for (int i=0;i<Lpieces.Count;i++)
+            {
+                if (Lpieces[i].color == color)
+                {
+                    for (int k=0;k<Lpieces[i].LprotectedPieces.Count;k++)
+                    {
+                        CurrProtectedPieces.Add(Lpieces[i].LprotectedPieces[k]);
+                    }
+                }
+            }   
+            
 
+            for (int i =0; i<CurrProtectedPieces.Count;i++)
+            {
+                CurrProtectedSquares.Add(GetSquare(CurrProtectedPieces[i].file, 
+                    CurrProtectedPieces[i].rank));
+            }
+        }
         public void FindAllLegalMovesForColor(CommonAttributes.Color color)
         {
             List<Square> temp = new List<Square>();
@@ -251,8 +275,11 @@ namespace Chess_over_local_network
                             }
                             FindAllLegalMovesForColor(opposite);
                         }
-                        LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
 
+
+                        //LHighlighted = Lpieces[i].GetLegalMovesOnBoard(this);
+                        FindAllProtectedPiecesForColor(selectedPiece.color);
+                        LHighlighted = CurrProtectedSquares;
                      
                     }
 
