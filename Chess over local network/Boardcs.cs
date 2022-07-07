@@ -29,6 +29,58 @@ namespace Chess_over_local_network
             squares = MakeSquares();
             PutPiecesOnSquares();
         }
+
+        public Boardcs(Boardcs boardToCopyFrom)
+        {
+
+            Lpieces = new List<Piece>();
+
+            for (int i=0;i<boardToCopyFrom.Lpieces.Count;i++)
+            {
+                Lpieces.Add( CopyPiece(boardToCopyFrom.Lpieces[i]));
+            }
+
+            for (int j=0;j<8;j++)
+            {
+                for (int i=0;i<8; i++)
+                {
+                    squares[j, i] = new Square(boardToCopyFrom.squares[j, i]);
+                }
+            }
+            PutPiecesOnSquares();
+
+        }
+
+
+        public Piece CopyPiece(Piece piece)
+        {
+            Piece CopiedPiece = null;
+
+            switch (piece.pieceType)
+            {
+                case Piece.pieceTypes.King:
+                    CopiedPiece = new King(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+                case Piece.pieceTypes.Queen:
+                    CopiedPiece = new Queen(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+                case Piece.pieceTypes.Bishop:
+                    CopiedPiece = new Bishop(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+                case Piece.pieceTypes.Knight:
+                    CopiedPiece = new Knight(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+                case Piece.pieceTypes.Rook:
+                    CopiedPiece = new Rook(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+                case Piece.pieceTypes.Pawn:
+                    CopiedPiece = new Pawn(piece.rank, piece.file, piece.color, piece.pieceType);
+                    break;
+
+
+            }
+            return CopiedPiece;
+        }
         public void FindAllProtectedPiecesForColor(CommonAttributes.Color color)
         {
             for (int i = 0; i < Lpieces.Count; i++)

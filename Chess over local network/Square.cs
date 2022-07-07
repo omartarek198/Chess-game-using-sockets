@@ -21,6 +21,16 @@ namespace Chess_over_local_network
             this.width = 90;
             this.height = 90;
         }
+        public Square(Square sq)
+        {
+            this.color = sq.color;
+            this.rank = sq.rank;
+            this.file = sq.file;
+            this.position = sq.position;
+            this.width = 90;
+            this.height = 90;
+            this.piece = sq.piece;
+        }
         public override void DrawSelf(Graphics graphics)
 
         {
