@@ -21,6 +21,8 @@ namespace Chess_over_local_network
         public List<Square> All = new List<Square>();
         public List<Piece> CurrProtectedPieces = new List<Piece>();
         public List<Square> CurrProtectedSquares = new List<Square>();
+        public CommonAttributes.Color currentTurn = CommonAttributes.Color.White;
+
 
 
         public Boardcs()
@@ -277,6 +279,32 @@ namespace Chess_over_local_network
             }
         }
 
+
+        public bool SquareIsLegal(Square obj)
+        {
+            for (int i=0;i<LHighlighted.Count;i++)
+            {
+                if (obj == LHighlighted[i]) return true;
+            }
+
+            return false;
+        }
+
+        public CommonAttributes.Color SwitchColor(CommonAttributes.Color color)
+        {
+
+            switch (color)
+            {
+                case CommonAttributes.Color.Black:
+                    return CommonAttributes.Color.White;
+                case CommonAttributes.Color.White:
+                    return CommonAttributes.Color.Black;
+                default:
+                    return CommonAttributes.Color.Black;
+            }
+            //returns the other color
+        }
+
         public void FindClickedPiece(int x, int y)
         {
 
@@ -286,7 +314,7 @@ namespace Chess_over_local_network
                 {
                     for (int j = 0; j < 8; j++)
                     {
-                        if (squares[i, j].IsClicked(x, y))
+                        if (squares[i, j].IsClicked(x, y) && SquareIsLegal(squares[i,j]))
                         {
                             if (squares[i, j].piece == null)
                             {
@@ -298,6 +326,8 @@ namespace Chess_over_local_network
                                 }
                                 selectedPiece = null;
                                 LHighlighted.RemoveRange(0, LHighlighted.Count);
+                                currentTurn = SwitchColor(currentTurn);
+
                                 break;
                             }
                             else
@@ -314,10 +344,10 @@ namespace Chess_over_local_network
                                 selectedPiece = null;
 
                                 LHighlighted.RemoveRange(0, LHighlighted.Count);
+                                currentTurn = SwitchColor(currentTurn);
 
                                 break;
                             }
-
 
                         }
                     }
@@ -327,7 +357,7 @@ namespace Chess_over_local_network
             {
                 for (int i = 0; i < Lpieces.Count; i++)
                 {
-                    if (Lpieces[i].IsClicked(x, y))
+                    if (Lpieces[i].IsClicked(x, y) && Lpieces[i].color == currentTurn)
                     {
                         selectedPiece = Lpieces[i];
 

@@ -46,11 +46,12 @@ namespace Chess_over_local_network
         {
 
             Boardcs board = new Boardcs();
-            
 
 
-            return new Boardcs(board);
 
+            //return new Boardcs(board);
+
+            return board;
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
